@@ -1,7 +1,3 @@
-import time
-import numpy as np
-import random
-
 def lcm(num_list):
 	# Recursively solve for each set of two values
 	if len(num_list) == 1:
@@ -26,12 +22,4 @@ def lcm(num_list):
 			return a
 		b += b_start
 
-nums = [random.randint(3, 10) for i in range(500)]
-
-np_start = time.time()
-val = np.lcm.reduce(nums)
-print(val, f"Custom numpy: {time.time() - np_start:.9f}")
-
-custom_start = time.time()
-val = lcm(nums)
-print(val, f"Custom time: {time.time() - custom_start:.9f}")
+print(lcm([2, 5, 4, 7, 123]))

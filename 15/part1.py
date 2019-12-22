@@ -1,4 +1,5 @@
 from intcomputer import IntcodeComputer
+from A_star import Grid, A_star
 intcode = list(eval(open("data.dat", "r").readline()))
 
 init = True
@@ -9,7 +10,6 @@ direction_dict = {1: "north", 2: "south", 3: "west", 4: "east"}
 turn_left_dict = {1: 3, 2: 4, 3: 2, 4: 1}
 turn_right_dict = {1: 4, 2: 3, 3: 1, 4: 2}
 reverse_dict = {1: 2, 2: 1, 3: 4, 4: 3}
-graphic_dict = {0: "#", 1:"-", 2:"O"}
 world_map = {}
 
 current_step = ""
@@ -49,10 +49,11 @@ def input_func():
 def output_func(value):
 	global init, computer, pos, current_step, direction
 	global turn_left_dict, turn_right_dict, reverse_dict, world_map
-	# print(pos, current_step, direction_dict[direction], value)
+
 	update_border(pos)
-	world_map[tuple(pos)] = graphic_dict[value]
-	if value == 2:
+	world_map[tuple(pos)] = value
+
+	if pos == [0, 0]:
 		computer.running = False
 	if init and value == 0:
 		pos = move(pos, reverse_dict[direction])
@@ -79,11 +80,20 @@ computer = IntcodeComputer(intcode, input_func, output_func)
 computer.run()
 world_map[(0, 0)] = "S"
 
-for y in range(maxY, minY-1, -1):
-	s = ""
-	for x in range(minX, maxX+1):
-		s += world_map.get((x, y), " ")
-	print(s)
+# Now we have the map, we can then find the optimal route with A*:
 
-print(pos)
-print(minX, minY, maxX, maxY)
+grid = Grid(maxX - minX + 1, maxY-minY + 1)
+graphic_dict = {0: grid.block_tile, 1: grid.space_tile, 2: "G", "S": "S"}
+for node in world_map:
+	if graphic_dict[world_map[node]] == "S":
+		start = (node[0] - minX, node[1] - minY)
+	elif graphic_dict[world_map[node]] == "G":
+		goal = (node[0] - minX, node[1] - minY)
+	grid[(node[0] - minX, node[1] - minY)] = graphic_dict[world_map[node]]
+
+def dist_to_goal(point):
+	return abs(goal[0] - point[0]) + abs(goal[1] - point[1])
+
+shortest_path = A_star(start, goal, grid, dist_to_goal)
+print(grid)
+print(len(shortest_path))
