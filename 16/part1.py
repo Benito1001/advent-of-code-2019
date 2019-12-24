@@ -1,30 +1,34 @@
 import time
+import numpy as np
 
-take_time = True
-
-signal = open("data.dat", "r").readline().replace("\n", "")
-
-start_pattern = [0, 1, 0, -1]
-
-def extend(pattern):
-	repetitions = int(len(pattern)/4 + 1)
-	return [0]*repetitions + [1]*repetitions + [0]*repetitions + [-1]*repetitions
+def pattern_value(i, n):
+	return [0, 1, 0, -1][(i//n)%4]
 
 start_time = time.time()
-for i in range(100):
-	new_signal = ""
-	pattern = start_pattern.copy()
-	for k in range(len(signal)):
-		s = 0
-		for index, num in enumerate(signal):
-			s += int(num)*pattern[(index+1)%len(pattern)]
-		new_signal += str(s)[-1]
-		pattern = extend(pattern)
-	frac = (i+1)/100
-	if take_time:
-		time_frac = (time.time() - start_time)*(1/frac)
-		take_time = False
-	print(f"\r{i+1}%, time remaining: {time_frac*(1-frac):.1f} seconds", end="")
-	signal = new_signal
 
-print("\n"+signal[:8])
+signal = open("data.dat", "r").readline().replace("\n", "")
+signal_length = len(signal)
+signal = np.matrix([int(v) for v in signal]).getT()
+
+start_pattern_time = time.time()
+pattern = np.array(0)
+pattern.resize(signal_length, signal_length)
+pattern = np.matrix(pattern)
+for n in range(1, signal_length+1):
+	pattern[:][n-1] = [pattern_value(i, n) for i in range(1, signal_length+1)]
+print(f"Pattern made in {time.time() - start_pattern_time:.3f} seconds")
+
+start_multi_time = time.time()
+for i in range(100):
+	signal = np.matrix([abs(v)%10 for v in (pattern*signal).getA1()]).getT()
+print(f"Signal decoded in {time.time() - start_multi_time:.3f} seconds")
+
+print(f"Finished in {time.time() - start_time:.3f} seconds")
+print("".join(str(v) for v in signal.getA1()[:8]))
+
+
+"""
+optimalization:
+start:  python -> 13.1s, pypy -> 1.5s
+matrix: python -> 0.13s, pypy -> N/A
+"""
