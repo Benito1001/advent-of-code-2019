@@ -21,7 +21,7 @@ def output_func(value):
 		elif out_list[2] == 4:
 			ball_pos = out_list[0]
 
-		if tile_dict.get(out_list[2]) == None:
+		if tile_dict.get(out_list[2]) is None:
 			score = out_list[2]
 		else:
 			print(f"\033[{out_list[1]+1};{out_list[0]+1}H{tile_dict[out_list[2]]}")

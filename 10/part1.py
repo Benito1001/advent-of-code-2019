@@ -21,7 +21,7 @@ with open("data.dat") as file:
 	for y, line in enumerate(file):
 		for x, val in enumerate(line):
 			if val == "#":
-			 	asteroids.append({"pos": Point(x, y), "sight_angles": []})
+				asteroids.append({"pos": Point(x, y), "sight_angles": []})
 
 for asteroid in asteroids:
 	for other_asteroid in asteroids:

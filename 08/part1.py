@@ -32,7 +32,7 @@ for layer in image.keys():
 	digit_count = {"0": 0, "1": 0, "2": 0}
 	for line in image[layer]:
 		for number in line:
-			if digit_count.get(number) != None:
+			if digit_count.get(number) is not None:
 				digit_count[number] += 1
 	digit_count_ray.append(digit_count)
 

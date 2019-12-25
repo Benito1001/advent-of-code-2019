@@ -20,8 +20,8 @@ def get_intcode_value(noun, verb):
 	return intcode[0]
 
 def i_to_noun_verb(i):
-	noun = i%100
-	return (i%100, int((i-noun)/100))
+	noun = i % 100
+	return (i % 100, int((i-noun)/100))
 
 i = 1
 intcode_value = get_intcode_value(0, 0)

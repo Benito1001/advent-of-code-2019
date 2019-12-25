@@ -11,7 +11,8 @@ class Moon:
 
 	def update_vel(self):
 		for moon in moons:
-			if moon == self: continue
+			if moon == self:
+				continue
 
 			if self.pos.x < moon.pos.x:
 				self.vel.x += 1

@@ -78,7 +78,7 @@ def A_star(start, goal, grid, h):
 		# if the goal is reached, return the path
 		if current == goal:
 			path = []
-			while came_from.get(current) != None:
+			while came_from.get(current) is not None:
 				path.append(current)
 				current = came_from[current]
 			grid.colorize(path)

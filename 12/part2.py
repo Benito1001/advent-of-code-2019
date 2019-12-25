@@ -106,7 +106,7 @@ def lcm(num_list):
 	b = lcm(num_list)
 
 	# Make sure b >= a
-	if a>b:
+	if a > b:
 		a = a+b
 		b = a-b
 		a = a-b

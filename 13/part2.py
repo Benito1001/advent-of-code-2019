@@ -1,5 +1,4 @@
 from intcomputer import IntcodeComputer
-import time
 
 intcode = list(eval(open("data.dat", "r").readline()))
 intcode[0] = 2
@@ -28,7 +27,6 @@ def draw_game():
 	for key in things_dict:
 		w = max(w, key[0])
 		h = max(h, key[1])
-	game_state = ""
 	for y in range(h+1):
 		s = ""
 		for x in range(w+2):

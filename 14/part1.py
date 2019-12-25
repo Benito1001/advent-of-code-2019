@@ -70,7 +70,7 @@ def make(reaction, amount):
 	# What is needed
 	for input in reaction.inputs:
 		# Make requires resources
-		if reactions.get(input.name) != None:
+		if reactions.get(input.name) is not None:
 			# How much?
 			in_storage = storage.get(input.name, 0)
 			new_reaction = reactions[input.name]
@@ -81,7 +81,6 @@ def make(reaction, amount):
 
 		# Consume resources
 		storage[input.name] = storage.get(input.name, 0) - input.cost*amount
-
 
 
 make(reactions["FUEL"], 1)

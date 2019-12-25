@@ -31,14 +31,14 @@ for key, value in orbits.copy().items():
 	if value == {}:
 		orbits.pop(key)
 
-symbol_dict = {0: "-", 1: "·", 2:"*"}
+symbol_dict = {0: "-", 1: "·", 2: "*"}
 
 def orb_print(orbit, depth):
 	for key, value in orbit.items():
 		print(f"{' '*depth*2}{symbol_dict[depth%3]} {key}", depth)
 		orb_print(value, depth+1)
 
-#orb_print(orbits, 0)
+# orb_print(orbits, 0)
 
 def orb_calc_orbsum(orbit, depth=0, orbsum=0, max_depth=0):
 	for key, value in orbit.items():

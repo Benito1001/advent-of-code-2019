@@ -2,7 +2,7 @@ import time
 import numpy as np
 
 def pattern_value(i, n):
-	return [0, 1, 0, -1][(i//n)%4]
+	return [0, 1, 0, -1][(i//n) % 4]
 
 start_time = time.time()
 
@@ -20,7 +20,7 @@ print(f"Pattern made in {time.time() - start_pattern_time:.3f} seconds")
 
 start_multi_time = time.time()
 for i in range(100):
-	signal = np.matrix([abs(v)%10 for v in (pattern*signal).getA1()]).getT()
+	signal = np.matrix([abs(v) % 10 for v in (pattern*signal).getA1()]).getT()
 print(f"Signal decoded in {time.time() - start_multi_time:.3f} seconds")
 
 print(f"Finished in {time.time() - start_time:.3f} seconds")

@@ -24,7 +24,7 @@ for wire_data in data:
 			# y-axis
 			else:
 				y += 1*direction[1]
-			if path_pont_dict.get((x, y)) != None:
+			if path_pont_dict.get((x, y)) is not None:
 				# Don't colide with self
 				if not path_pont_dict.get((x, y))[0] == id:
 					collisions.append((x, y))

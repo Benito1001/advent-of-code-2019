@@ -70,7 +70,7 @@ def make(reaction, amount, storage):
 	# What is needed
 	for input in reaction.inputs:
 		# If input can be made (is not ORE)
-		if reactions.get(input.name) != None:
+		if reactions.get(input.name) is not None:
 			new_reaction = reactions[input.name]
 			# How much?
 			in_storage = storage.get(input.name, 0)

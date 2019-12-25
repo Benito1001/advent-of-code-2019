@@ -1,6 +1,5 @@
-import time
 from intcomputer import IntcodeComputer
-from A_star import Grid, A_star
+from A_star import Grid
 intcode = list(eval(open("data.dat", "r").readline()))
 
 init = True

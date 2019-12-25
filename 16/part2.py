@@ -9,7 +9,7 @@ for i in range(100):
 	partial_sum = 0
 	for j in range(1, signal_length+1):
 		partial_sum += signal[-j]
-		new_signal[-j] = abs(partial_sum)%10
+		new_signal[-j] = abs(partial_sum) % 10
 	signal = new_signal
 
 print("".join([str(v) for v in signal[:8]]))

@@ -62,11 +62,11 @@ with open("data.dat") as file:
 		reactions[output_chem.name] = Reaction(input_chems, output_chem)
 
 tree = {}
-def swapify(reaction, waste = False):
+def swapify(reaction, waste=False):
 	inputs_list = reaction.inputs.copy()
 	for input in inputs_list:
 		chain_reaction = reactions.get(input.name)
-		if chain_reaction == None:
+		if chain_reaction is None:
 			continue
 		chain_reaction_cost = chain_reaction.output.cost
 		multi = input.cost/chain_reaction_cost
