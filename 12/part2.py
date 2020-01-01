@@ -5,7 +5,7 @@ import time
 start_time = time.time()
 
 def sign(n):
-	return (n>0) - (n<0)
+	return (n > 0) - (n < 0)
 
 class Axinator:
 	def __init__(self, pos):
